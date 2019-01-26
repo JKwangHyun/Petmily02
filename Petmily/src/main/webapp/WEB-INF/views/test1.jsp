@@ -130,11 +130,12 @@
 	</div>
 	
 	<div id="content2" style="position:relative;width:100%;height:50px;background-color:#F7F7F7;">
-		<div class="search-box-container">
-			<button class="submit"><i class="fa fa-search"></i></button>
-    		<input class="search-box">
+		<div style="position:relative;width:520px;height:50px;margin:0 auto">
+			<div class="search-box-container">
+				<button class="submit"><i class="fa fa-search"></i></button>
+	    		<input class="search-box">
+			</div>
 		</div>
-		<i class="fas fa-th-large" style="position:relative;float:left;margin-top:10px;margin-left:50px;font-size:30px;color:gray"></i>
 	</div>
 	
 
