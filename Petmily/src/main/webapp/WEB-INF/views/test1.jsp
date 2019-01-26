@@ -130,7 +130,7 @@
 	</div>
 	
 	<div id="content2" style="position:relative;width:100%;height:50px;background-color:#F7F7F7;">
-		<div style="position:relative;width:520px;height:50px;margin:0 auto">
+		<div style="position:relative;width:500px;height:50px;margin:0 auto">
 			<div class="search-box-container">
 				<button class="submit"><i class="fa fa-search"></i></button>
 	    		<input class="search-box">
