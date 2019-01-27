@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
-
 <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
@@ -23,7 +22,7 @@
 	}
 	.container {
         display: block;
-       position: absolute;
+		position: absolute;
         text-align: center;
         width: 100%;
         top: 50%;
@@ -124,14 +123,10 @@
 </style>
 <script>
 	$.fn.toggleState = function (b) {
-		$(this).
-		stop().
-		animate(
+		$(this).stop().animate(
 		{
 			width: b ? "400px" : "40px" },
-	
-		600,
-		"easeOutElastic");
+		    600,"easeOutElastic");
 	};
 	
 	$(document).ready(function () {
@@ -171,16 +166,12 @@
 				animate(
 				{
 					opacity: 1 },
-	
 				300).
-	
 				delay(2000).
 				animate(
 				{
 					opacity: 0 },
-	
 				300);
-	
 			}
 		}
 		
@@ -236,6 +227,22 @@
 	</div>
 	
 	<div id="content1" style="position:relative;width:100%;height:480px;background-color:white;">
+		<div style="position:relative;margin:0 auto; width:1200px;height:480px;">
+			<div style="position:relative;float:left;width:800px;height:100%;">
+				<pre style="position:relative ;display:block; top:100;left:-180;">
+					<font size="35" style="font-family:serif;">Animal is</font>
+					<font size="35" style="font-family:serif;">Love</font>
+					<font size="35" style="font-family:serif;">with PetMily</font>
+				</pre>
+				<div style="position:relative;top:100;left:80;">
+					<input type="button" value="Sign Up" style="border:0; border-radius:10px;color:white;font-size:30px;background-color:221F1F">
+					<input type="button" value="Adoption" style="border:0;border-radius:10px;color:white;font-size:30px;background-color:221F1F">
+				</div>
+			</div>
+			<div style="position:relative;float:left;width:400px;height:100%;">
+				<iframe src="https://giphy.com/embed/8UHB9thDBfbOTaRJNn" width="280px" height="280px" style="position:absolute;pointer-events:none;cursor:default;top:100px;left:80px;" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+			</div>
+		</div>
 	</div>
 	
 	<div id="content2" style="position:relative;width:100%;height:50px;background-color:#F7F7F7;margin:0 auto;">
