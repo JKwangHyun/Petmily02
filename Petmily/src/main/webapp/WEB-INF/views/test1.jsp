@@ -107,12 +107,19 @@
 		list-style:none;
 		display:inline-block;
 		font-weight:bold;
+		height:37px;
 	}
 	#sign li {
 		float:left;
 		list-style:none;
 		display:inline-block;
 		font-weight:bold;
+	}
+	.menu_slide {
+		list-style:none;
+		font-weight:bold;
+		margin-top:10px;
+    	padding-left:0px;
 	}
 </style>
 <script>
@@ -125,7 +132,6 @@
 	
 		600,
 		"easeOutElastic");
-	
 	};
 	
 	$(document).ready(function () {
@@ -177,23 +183,56 @@
 	
 			}
 		}
+		
+		// menu_slide 
+		$("#menu_slide_Community,#menu_slide_Adoption").css("display","none");
+		$("#community,#menu_slide_Community").mouseout(function() {
+			$("#menu_slide_Community").stop().slideUp("fast");
+		});
+		$("#community,#menu_slide_Community").mouseover(function() {
+			$("#menu_slide_Community").stop().slideDown("fast");
+		});
+		$("#adoption,#menu_slide_Adoption").mouseout(function() {
+			$("#menu_slide_Adoption").stop().slideUp("fast");
+		});
+		$("#adoption,#menu_slide_Adoption").mouseover(function() {
+			$("#menu_slide_Adoption").stop().slideDown("fast");
+		});
 	});
+	
+	
 </script>
 <body>
 	<!-- header -->
 	<div id="headbar" style="position:relative;width:100%;height:50px;background-color:221F1F;">
-		<div style="position:relative;width:97%;height:40px;margin:0 auto;padding-top:6px;">
-			<a href=""><img src="resources/img/logo6.png" width="130px" height="40px" style="float:left;"/></a>
+		<div style="position:absolute;width:97%;height:40px;margin:0 auto;padding-top:6px;left:40px;">
+			<a href=""><img src="resources/img/logo6.png" width="140px" height="40px" style="float:left;"/></a>
 			<ul id="menu" style="position:relative;top:-8px;float:left;">
-				<li><a href="#">Community</a></li>
-				<li><a href="#">Adoption Of Pets</a></li>
+				<li id="community"><a href="#">Community</a></li>
+				<li id="adoption"><a href="#">Adoption Of Pets</a></li>
 				<li><a href="#">Find Pet Hospital</a></li>
 			</ul>
 			<ul id="sign" style="position:relative;top:-8px;float:right;">
-				<li><a href="#">Sing In</a></li>
-				<li><a href="#">Sing Up</a></li>
+				<li><a href="#">Sign In</a></li>
+				<li><a href="#">Sign Up</a></li>
 			</ul>
 		</div>
+	</div>
+	
+	<!-- Community slide -->
+	<div id="menu_slide_Community" style="position:absolute;width:190px;height:85px;background-color:221F1F;z-index:10;left:220px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">
+		<ul class="menu_slide">
+			<li style="margin-bottom:15px;"><a href="">공지사항</a></li>
+			<li><a href="">정보공유 게시판</a></li>
+		</ul>
+	</div>
+	
+	<!--  Adoption Of Pets slide -->
+	<div id="menu_slide_Adoption" style="position:absolute;width:190px;height:85px;background-color:221F1F;z-index:10;left:337px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">
+		<ul class="menu_slide">
+			<li style="margin-bottom:15px;"><a href="">분양 등록</a></li>
+			<li><a href="">분양 하기</a></li>
+		</ul>
 	</div>
 	
 	<div id="content1" style="position:relative;width:100%;height:480px;background-color:white;">
