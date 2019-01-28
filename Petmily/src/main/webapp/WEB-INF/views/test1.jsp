@@ -70,7 +70,7 @@
 	  width: 40px;
 	  padding: 0;
 	  background-color: #fff;
-	  border: 3px solid #221F1F;
+	  border: 3px solid #5c5c5b;
 	  border-radius: 28px;
 	  overflow: hidden;
 	}
@@ -88,7 +88,7 @@
 	  float: left;
 	  font-family: "Lato";
 	  font-size: 1em;
-	  color: #212121;
+	  color: #333;
 	  background-color: #fff;
 	}
 	.submit {
@@ -105,7 +105,7 @@
 	  display: inline !important;
 	  line-height: 100%;
 	  pointer-event: none;
-	  color: #221F1F;
+	  color: #5c5c5b;
 	}
 	li a {
 		font-size:16px;
@@ -144,6 +144,25 @@
 		color:white;
 	}
 	
+	/* 로그인 팝업창 */
+	#popup_wrap {width:400px; height:500px; background:#fff; border: 0px solid black; border-radius:20px;position:fixed; top:50%; left:50%; margin:-250px 0 0 -200px; z-index:9999; display:none;
+				-webkit-animation-name: animatetop;
+  				-webkit-animation-duration: 0.4s;
+  				animation-name: animatetop;
+  				animation-duration: 0.4s
+	} 
+	#mask {width:100%; height:100%; position:fixed; background:rgba(0,0,0,0.7) repeat; top:0; left:0; z-index:999; display:none;} 
+	#popup_close {z-index:9999; width: 25px; height: 25px; background-color:black; color:white; text-align: center; border: none; font-size: 18px;position: relative; left:365px;top:-68px;}
+	/* Add Animation */
+	@-webkit-keyframes animatetop {
+		from {top:-300px; opacity:0} 
+ 		to {top:50%; opacity:1}
+	}
+
+	@keyframes animatetop {
+		from {top:-300px; opacity:0}
+		to {top:50%; opacity:1}
+	}
 </style>
 <script>
 	$.fn.toggleState = function (b) {
@@ -245,9 +264,17 @@
 		$("#other").mouseout(function() {
 			$("#other").css("font-weight","normal");
 		});
+		
+		// 로그인 팝업창
+		$("#signIn").click(function(){ 
+			$("#popup_wrap").css("display", "block"); 
+			$("#mask").css("display", "block"); 
+		}); 
+		$("#popup_close").click(function(){ 
+			$("#popup_wrap").css("display", "none"); 
+			$("#mask").css("display", "none"); 
+		}); 
 	});
-	
-	
 </script>
 <body>
 	<!-- header -->
@@ -260,8 +287,8 @@
 				<li><a href="#">Find Pet Hospital</a></li>
 			</ul>
 			<ul id="sign" style="position:relative;top:-8px;float:right;">
-				<li><a href="#">Sign In</a></li>
-				<li><a href="#">Sign Up</a></li>
+				<li  id="signIn">Sign In</li>
+				<li><a href="">Sign Up</a></li>
 			</ul>
 		</div>
 	</div>
@@ -282,6 +309,7 @@
 		</ul>
 	</div>
 	
+	<!-- 중앙 화면 -->
 	<div id="content1" style="position:relative;width:100%;height:480px;background-color:white;">
 		<div style="position:relative;margin:0 auto; width:1200px;height:480px;">
 			<div style="position:relative;float:left;width:800px;height:100%;">
@@ -291,8 +319,8 @@
 					<font size="35" style="font-family:serif;">with PetMily</font>
 				</pre>
 				<div style="position:relative;top:100;left:80;">
-					<input type="button" value="Sign Up" style="border:0; border-radius:10px;color:white;font-size:30px;background-color:221F1F">
-					<input type="button" value="Adoption" style="border:0;border-radius:10px;color:white;font-size:30px;background-color:221F1F">
+					<input type="button" value="Sign Up" style="border:0; border-radius:10px;color:white;font-size:30px;background-color:#333">
+					<input type="button" value="Adoption" style="border:0;border-radius:10px;color:white;font-size:30px;background-color:#333">
 				</div>
 			</div>
 			<div style="position:relative;float:left;width:400px;height:100%;">
@@ -301,7 +329,8 @@
 		</div>
 	</div>
 	
-	<div id="content2" style="position:relative;width:100%;height:50px;background-color:#F7F7F7;margin:0 auto;">
+	<!-- 검색창, 네모 메뉴 -->
+	<div id="content2ㄴ" style="position:relative;width:100%;height:50px;background-color:#F7F7F7;margin:0 auto;">
     	<div style="position:relative;width:1060px;height:50px;margin:0 auto">
 	    	<div class="container">
 			    <div class="search-box-container">
@@ -309,10 +338,10 @@
 				    <input class="search-box">
 			    </div>
 	    	</div>
-	    	<div id="square_back" style="position:absolute;width:60px;height:40px;right:-20;margin-top:5px;background-color:#333;border-radius:5px;display:none;"></div>
-	    	<div id="square_menu" style="position:absolute;z-index:10;margin-top:5px;right:-160;width:150px;height:200px;background-color:#333;border-radius:10px;display:none;">
-	    		<div style="width:150px;height:50px;text-align:center;color:white;font-size:20;pointer-events:none;cursor:default;">Select</div>
-	    		<div style="width:150px;height:50px;text-align:center;color:white;"><a href=""  id="dog"><i class="fas fa-dog"></i> Dogs</a></div>
+	    	<div id="square_back" style="position:absolute;width:50px;height:40px;right:-10;margin-top:5px;background-color:#333;border-top-left-radius:5px;border-bottom-left-radius:5px;display:none;opacity:0.5"></div>
+	    	<div id="square_menu" style="position:absolute;z-index:10;margin-top:5px;right:-160;width:150px;height:200px;background-color:#333;border-bottom-left-radius:5px;border-top-right-radius:5px;border-bottom-right-radius:5px;display:none;opacity:0.5">
+	    		<div style="width:150px;height:50px;text-align:center;color:white;font-size:20;pointer-events:none;cursor:default;margin-top:8px;">Select</div>
+	    		<div style="width:150px;height:50px;text-align:center;color:white;"><a href="" id="dog"><i class="fas fa-dog"></i> Dogs</a></div>
 	    		<div style="width:150px;height:50px;text-align:center;color:white;"><a href="" id="cat"><i class="fas fa-cat"></i> Cats</a></div>
 	    		<div style="width:150px;height:50px;text-align:center;color:white;"><a href="" id="other"><i class="fas fa-paw"></i> Others</a></div>
 	    	</div>
@@ -320,9 +349,6 @@
    		</div>
 	</div>
 
-	<!-- 네모 메뉴바 -->
-	<!-- <div id="ddd" style="position:absolute;z-index:9999;top:535px;right:180;width:200px;height:200px;background-color:221F1F;border-radius:10px;"></div> -->
-		
 	<!-- 분양 리스트 -->
 	<div id="content3" style="position:relative;width:100%;height:700px;background-color:#f0efef;">
 		<div style="position:relative;width:1080px;height:320px;margin:0 auto">
@@ -373,6 +399,12 @@
 				<i class="fas fa-eye" style="margin-top:10px;color:gray"> 30&nbsp;<i class="fas fa-thumbtack"> 6</i></i>
 			</div>
 		</div>
+	</div>
+	
+	<!-- 로그인 팝업창 -->
+	<div id="mask"></div>
+	<div id="popup_wrap">
+			
 	</div>
 	
 </body>
