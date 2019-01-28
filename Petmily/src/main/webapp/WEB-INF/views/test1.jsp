@@ -139,6 +139,11 @@
 		margin:10px auto;
 		display:block;"
 	}
+	#square_menu a{
+		text-decoration:none;
+		color:white;
+	}
+	
 </style>
 <script>
 	$.fn.toggleState = function (b) {
@@ -220,6 +225,26 @@
 			$("#square_menu").css("display","none");
 			$("#square").css("color","gray");
 		});
+		
+		// menu 선택 시 
+		$("#dog").mouseover(function() {
+			$("#dog").css("font-weight","bold");
+		});
+		$("#dog").mouseout(function() {
+			$("#dog").css("font-weight","normal");
+		});
+		$("#cat").mouseover(function() {
+			$("#cat").css("font-weight","bold");
+		});
+		$("#cat").mouseout(function() {
+			$("#cat").css("font-weight","normal");
+		});
+		$("#other").mouseover(function() {
+			$("#other").css("font-weight","bold");
+		});
+		$("#other").mouseout(function() {
+			$("#other").css("font-weight","normal");
+		});
 	});
 	
 	
@@ -242,7 +267,7 @@
 	</div>
 	
 	<!-- Community slide -->
-	<div id="menu_slide_Community" style="position:absolute;width:190px;height:85px;background-color:221F1F;z-index:10;left:220px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">
+	<div id="menu_slide_Community" style="position:absolute;width:190px;height:85px;background-color:#333;z-index:10;left:220px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">
 		<ul class="menu_slide">
 			<li style="margin-bottom:15px;"><a href="">공지사항</a></li>
 			<li><a href="">정보공유 게시판</a></li>
@@ -250,7 +275,7 @@
 	</div>
 	
 	<!--  Adoption Of Pets slide -->
-	<div id="menu_slide_Adoption" style="position:absolute;width:190px;height:85px;background-color:221F1F;z-index:10;left:337px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">
+	<div id="menu_slide_Adoption" style="position:absolute;width:190px;height:85px;background-color:#333;z-index:10;left:337px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">
 		<ul class="menu_slide">
 			<li style="margin-bottom:15px;"><a href="">분양 등록</a></li>
 			<li><a href="">분양 하기</a></li>
@@ -285,7 +310,12 @@
 			    </div>
 	    	</div>
 	    	<div id="square_back" style="position:absolute;width:60px;height:40px;right:-20;margin-top:5px;background-color:#333;border-radius:5px;display:none;"></div>
-	    	<div id="square_menu" style="position:absolute;z-index:10;margin-top:5px;right:-210;width:200px;height:200px;background-color:#333;border-radius:10px;display:none;"></div>
+	    	<div id="square_menu" style="position:absolute;z-index:10;margin-top:5px;right:-160;width:150px;height:200px;background-color:#333;border-radius:10px;display:none;">
+	    		<div style="width:150px;height:50px;text-align:center;color:white;font-size:20;pointer-events:none;cursor:default;">Select</div>
+	    		<div style="width:150px;height:50px;text-align:center;color:white;"><a href=""  id="dog"><i class="fas fa-dog"></i> Dogs</a></div>
+	    		<div style="width:150px;height:50px;text-align:center;color:white;"><a href="" id="cat"><i class="fas fa-cat"></i> Cats</a></div>
+	    		<div style="width:150px;height:50px;text-align:center;color:white;"><a href="" id="other"><i class="fas fa-paw"></i> Others</a></div>
+	    	</div>
 	    	<i id="square" class="fas fa-th-large" style="position:absolute;right:0;margin-top:11px;font-size:30px;color:gray"></i>
    		</div>
 	</div>
