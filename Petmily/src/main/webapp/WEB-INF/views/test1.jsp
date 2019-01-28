@@ -18,7 +18,20 @@
 		padding: 0px;
 	}
 	.petList {
-		position:relative;float:left;width:250px;height:250px;background-color:white;margin:35px 10px
+		position:relative;float:left;width:250px;height:300px;background-color:white;margin:35px 10px;text-align:center;
+	}
+	.petlist a{
+		text-decoration:none;
+		color:black;
+		font-weight:bold;
+	}
+	.petList2 {
+		position:relative;float:left;width:250px;height:300px;background-color:white;margin:0 10px;text-align:center;
+	}
+	.petlist2 a{
+		text-decoration:none;
+		color:black;
+		font-weight:bold;
 	}
 	.container {
         display: block;
@@ -120,6 +133,12 @@
 		margin-top:10px;
     	padding-left:0px;
 	}
+	.pets{
+		height:220px;
+		width:90%;
+		margin:10px auto;
+		display:block;"
+	}
 </style>
 <script>
 	$.fn.toggleState = function (b) {
@@ -189,13 +208,25 @@
 		$("#adoption,#menu_slide_Adoption").mouseover(function() {
 			$("#menu_slide_Adoption").stop().slideDown("fast");
 		});
+		
+		// 네모 menu
+		$("#square,#square_back,#square_menu").mouseover(function() {
+			$("#square_back").css("display","block");
+			$("#square_menu").css("display","block");
+			$("#square").css("color","white");
+		});
+		$("#square,#square_back,#square_menu").mouseout(function() {
+			$("#square_back").css("display","none");
+			$("#square_menu").css("display","none");
+			$("#square").css("color","gray");
+		});
 	});
 	
 	
 </script>
 <body>
 	<!-- header -->
-	<div id="headbar" style="position:relative;width:100%;height:50px;background-color:221F1F;">
+	<div id="headbar" style="position:relative;width:100%;height:50px;background-color:#333;">
 		<div style="position:absolute;width:97%;height:40px;margin:0 auto;padding-top:6px;left:40px;">
 			<a href=""><img src="resources/img/logo6.png" width="140px" height="40px" style="float:left;"/></a>
 			<ul id="menu" style="position:relative;top:-8px;float:left;">
@@ -246,22 +277,71 @@
 	</div>
 	
 	<div id="content2" style="position:relative;width:100%;height:50px;background-color:#F7F7F7;margin:0 auto;">
-    	<div class="container">
-		    <div class="search-box-container">
-			    <button class="submit"><i class="fa fa-search" style="padding-left: 15px;"></i></button>
-			    <input class="search-box">
-		    </div>
-    	</div>
-    	<i class="fas fa-th-large" style="position:relative;float:right;margin-top:10px;margin-right:430px;font-size:30px;color:gray"></i>
-   </div>
-	
+    	<div style="position:relative;width:1060px;height:50px;margin:0 auto">
+	    	<div class="container">
+			    <div class="search-box-container">
+				    <button class="submit"><i class="fa fa-search" style="padding-left: 15px;"></i></button>
+				    <input class="search-box">
+			    </div>
+	    	</div>
+	    	<div id="square_back" style="position:absolute;width:60px;height:40px;right:-20;margin-top:5px;background-color:#333;border-radius:5px;display:none;"></div>
+	    	<div id="square_menu" style="position:absolute;z-index:10;margin-top:5px;right:-210;width:200px;height:200px;background-color:#333;border-radius:10px;display:none;"></div>
+	    	<i id="square" class="fas fa-th-large" style="position:absolute;right:0;margin-top:11px;font-size:30px;color:gray"></i>
+   		</div>
+	</div>
 
-	<div id="content3" style="position:relative;width:100%;height:320px;background-color:#f0efef;">
+	<!-- 네모 메뉴바 -->
+	<!-- <div id="ddd" style="position:absolute;z-index:9999;top:535px;right:180;width:200px;height:200px;background-color:221F1F;border-radius:10px;"></div> -->
+		
+	<!-- 분양 리스트 -->
+	<div id="content3" style="position:relative;width:100%;height:700px;background-color:#f0efef;">
 		<div style="position:relative;width:1080px;height:320px;margin:0 auto">
-			<div class="petList"></div>
-			<div class="petList"></div>
-			<div class="petList"></div>
-			<div class="petList"></div>
+			<div class="petList" >
+				<img class="pets" src="resources/img/dog1.jpg"  />
+				<a href="" ><i class="fas fa-venus" style="color:hotpink;"></i>&nbsp; 미니 핀  1살</a><br>
+				<i class="fas fa-eye" style="margin-top:10px;color:gray"> 30&nbsp;<i class="fas fa-thumbtack"> 2</i></i>
+			</div>
+			<div class="petList">
+				<img class="pets" src="resources/img/dog3.jpg"  />
+				<a href="" >
+				<i class="fas fa-venus" style="color:hotpink;"></i> 
+				<i class="fas fa-venus" style="color:hotpink;"></i> 
+				<i class="fas fa-mars"style="color:#4285F4;"></i>
+				 포메라니안  1살</a><br>
+				<i class="fas fa-eye" style="margin-top:10px;color:gray"> 30&nbsp;<i class="fas fa-thumbtack"> 2</i></i>
+			</div>
+			<div class="petList">
+				<img class="pets" src="resources/img/cat1.jpg"  />
+				<a href="" ><i class="fas fa-mars"style="color:#4285F4;"></i>&nbsp; 고양이  5개월</a><br>
+				<i class="fas fa-eye" style="margin-top:10px;color:gray"> 37&nbsp;<i class="fas fa-thumbtack"> 6</i></i>
+			</div>
+			<div class="petList">
+				<img class="pets" src="resources/img/rabbit1.jpg"  />
+				<a href="" ><i class="fas fa-venus" style="color:hotpink;"></i>&nbsp; 토끼  1살</a><br>
+				<i class="fas fa-eye" style="margin-top:10px;color:gray"> 37&nbsp;<i class="fas fa-thumbtack"> 6</i></i>
+			</div>
+		</div>
+		<div style="position:relative;width:1080px;height:320px;margin:0 auto">
+			<div class="petList2">
+				<img class="pets" src="resources/img/cat2.jpg"  />
+				<a href="" ><i class="fas fa-mars"style="color:#4285F4;"></i>&nbsp; 페르시안  4개월</a><br>
+				<i class="fas fa-eye" style="margin-top:10px;color:gray"> 39&nbsp;<i class="fas fa-thumbtack"> 5</i></i>
+			</div>
+			<div class="petList2">
+				<img class="pets" src="resources/img/hamster1.jpg"  />
+				<a href="" ><i class="fas fa-venus" style="color:hotpink;"></i>&nbsp; 햄스터 2살</a><br>
+				<i class="fas fa-eye" style="margin-top:10px;color:gray"> 13&nbsp;<i class="fas fa-thumbtack"> 0</i></i>
+			</div>
+			<div class="petList2">
+				<img class="pets" src="resources/img/dog2.jpg"  />
+				<a href="" ><i class="fas fa-venus" style="color:hotpink;"></i>&nbsp; 푸들 6개월</a><br>
+				<i class="fas fa-eye" style="margin-top:10px;color:gray"> 29&nbsp;<i class="fas fa-thumbtack"> 7</i></i>
+			</div>
+			<div class="petList2">
+				<img class="pets" src="resources/img/cat3.jpg"  />
+				<a href="" ><i class="fas fa-mars"style="color:#4285F4;"></i>&nbsp; 랙돌 5개월</a><br>
+				<i class="fas fa-eye" style="margin-top:10px;color:gray"> 30&nbsp;<i class="fas fa-thumbtack"> 6</i></i>
+			</div>
 		</div>
 	</div>
 	
