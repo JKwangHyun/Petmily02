@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="resources/css/signForm.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 <script src="/Petmily/jqlib/jquery-3.2.1.min.js"></script>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +26,7 @@
 		font-weight:bold;
 	}
 	.petList2 {
-		position:relative;float:left;width:250px;height:300px;background-color:white;margin:0 10px;text-align:center;
+		position:relative;float:left;width:250px;height:300px;background-color:white;margin:35px 10px;text-align:center;
 	}
 	.petlist2 a{
 		text-decoration:none;
@@ -46,22 +46,6 @@
         -ms-transform: translateY(-50%);
         transform: translateY(-50%);
         
-	}
-	h1 {
-	  font-family: "Lato";
-	  font-size: 1.3em;
-	  color: #fff;
-	  letter-spacing: 1px;
-	  margin-bottom: 50px;
-	}
-	h3 {
-	  display: block;
-	  height: 19px;
-	  margin-top: 30px;
-	  font-family: "Lato";
-	  font-size: 1em;
-	  color: #fff;
-	  opacity: 0;
 	}
 	.search-box-container {
 	  display: inline-block;
@@ -126,6 +110,9 @@
 		list-style:none;
 		display:inline-block;
 		font-weight:bold;
+		margin:0px 15px;
+		color:white;
+		cursor:pointer;
 	}
 	.menu_slide {
 		list-style:none;
@@ -145,23 +132,97 @@
 	}
 	
 	/* 로그인 팝업창 */
-	#popup_wrap {width:400px; height:500px; background:#fff; border: 0px solid black; border-radius:20px;position:fixed; top:50%; left:50%; margin:-250px 0 0 -200px; z-index:9999; display:none;
+	#signIn_popup {
+		width:550px;
+		height:400px; 
+		background:#f0efef; 
+		border: 0px solid black; 
+		border-radius:20px;
+		position:fixed; top:50%; left:46%; margin:-250px 0 0 -200px; z-index:9999; display:none;
+		-webkit-animation-name: animatetop;
+  		-webkit-animation-duration: 0.4s;
+  		animation-name: animatetop_signIn;
+  		animation-duration: 0.4s
+	} 
+	#mask {width:100%; height:100%; position:fixed; background:rgba(0,0,0,0.7) repeat; top:0; left:0; z-index:999; display:none;} 
+	#signIn_close {z-index:9999;color:#333;font-size:20px;position: absolute;right:10; top:10;cursor:pointer;}
+	
+	@-webkit-keyframes animatetop_signIn {
+		from {top:-300px; opacity:0} 
+ 		to {top:50%; opacity:1}
+	}
+	@keyframes animatetop_signIn {
+		from {top:-300px; opacity:0}
+		to {top:50%; opacity:1}
+	}
+	
+	/* 회원가입 팝업 */
+	#popup_wrap {width:600px; height:800px; background:#f0efef; border: 0px solid black; border-radius:20px;position:fixed; top:35%; left:45%; margin:-250px 0 0 -200px; z-index:9999; display:none;
 				-webkit-animation-name: animatetop;
   				-webkit-animation-duration: 0.4s;
   				animation-name: animatetop;
   				animation-duration: 0.4s
 	} 
-	#mask {width:100%; height:100%; position:fixed; background:rgba(0,0,0,0.7) repeat; top:0; left:0; z-index:999; display:none;} 
 	#popup_close {z-index:9999; width: 25px; height: 25px; background-color:black; color:white; text-align: center; border: none; font-size: 18px;position: relative; left:365px;top:-68px;}
-	/* Add Animation */
+
 	@-webkit-keyframes animatetop {
 		from {top:-300px; opacity:0} 
  		to {top:50%; opacity:1}
 	}
-
 	@keyframes animatetop {
 		from {top:-300px; opacity:0}
-		to {top:50%; opacity:1}
+		to {top:35%; opacity:1}
+	}
+	
+	/*Checkboxes styles*/
+	input[type="checkbox"] { display: none; }
+	input[type="checkbox"] + label {
+  		display: block;
+  		position: relative;
+  		padding-left:10px;
+  		font: 13px/20px 'Open Sans', Arial, sans-serif;
+  		color: #ddd;
+  		cursor: pointer;
+  		-webkit-user-select: none;
+  		-moz-user-select: none;
+  		-ms-user-select: none;
+  
+	}
+	input[type="checkbox"] + label:last-child { margin-bottom: 0; }
+	input[type="checkbox"] + label:before {
+  		content: '';
+  		display: block;
+  		width: 20px;
+  		height: 20px;
+  		border: 2px solid #da532c;
+  		border-radius:9px;
+  		position: absolute;
+  		left: 0;
+  		top: 0;
+  		opacity: .6;
+  		-webkit-transition: all .12s, border-color .08s;
+  		transition: all .12s, border-color .08s;
+	}
+	input[type="checkbox"]:checked + label:before {
+  		width: 10px;
+  		top: -5px;
+  		left: 5px;
+  		border-radius: 0;
+  		opacity: 1;
+  		border-top-color: transparent;
+  		border-left-color: transparent;
+  		-webkit-transform: rotate(45deg);
+  		transform: rotate(45deg);
+	}
+	.buttonnn button{
+		position:relative;
+		font-family:'Nanum Square';
+		font-weight:bold;
+		font-size:25px;
+		color:#333;
+		opacity:0.5;
+		border:none;
+		background-color:#f0efef;
 	}
 </style>
 <script>
@@ -267,13 +328,58 @@
 		
 		// 로그인 팝업창
 		$("#signIn").click(function(){ 
+			$("#signIn_popup").css("display", "block"); 
+			$("#mask").css("display", "block"); 
+		}); 
+		$("#signIn_close").click(function(){ 
+			$("#signIn_popup").css("display", "none"); 
+			$("#mask").css("display", "none"); 
+		}); 
+		
+		// 회원가입 팝업창
+		$("#signUp").click(function(){ 
 			$("#popup_wrap").css("display", "block"); 
 			$("#mask").css("display", "block"); 
 		}); 
 		$("#popup_close").click(function(){ 
 			$("#popup_wrap").css("display", "none"); 
 			$("#mask").css("display", "none"); 
-		}); 
+		});
+		
+		$(function() {
+			$("#checkall").change(function() {
+			// 전체선택 체크박스의 체크상태 판별
+				var is_check = $(this).is(":checked");
+			// 하위 체크박스에 체크상태 적용
+				$(".check123").prop("checked", is_check);
+			});
+			$(".check123").change(function() {
+			// 전체선택 체크박스의 체크상태 판별
+				$("#checkall").prop("checked", false);
+			});
+		});
+		// 화면
+		$(window).resize(function() {
+			if($(window).width() > 1400) {
+				$("#content2_container").css("width","1060px");
+				$("#content3").css("height","750px");
+				$("#petList_container").css("width","1080px");
+				$("#petList_container").css("height","750px");
+			}
+			
+			else if($(window).width() < 1100) {
+				$("#content2_container").css("width","510px");
+				$("#content3").css("height","1500px");
+				$("#petList_container").css("width","540px");
+				$("#petList_container").css("height","1500px");
+			}
+			else if($(window).width() < 1400) {
+				$("#content2_container").css("width","790px");
+				$("#content3").css("height","1100px");
+				$("#petList_container").css("width","820px");
+				$("#petList_container").css("height","1100px");
+			}
+		});
 	});
 </script>
 <body>
@@ -287,8 +393,8 @@
 				<li><a href="#">Find Pet Hospital</a></li>
 			</ul>
 			<ul id="sign" style="position:relative;top:-8px;float:right;">
-				<li  id="signIn">Sign In</li>
-				<li><a href="">Sign Up</a></li>
+				<li id="signIn">Sign In</li>
+				<li id="signUp">Sign Up</li>
 			</ul>
 		</div>
 	</div>
@@ -311,7 +417,7 @@
 	
 	<!-- 중앙 화면 -->
 	<div id="content1" style="position:relative;width:100%;height:480px;background-color:white;">
-		<div style="position:relative;margin:0 auto; width:1200px;height:480px;">
+		<div id="content1_container" style="position:relative;margin:0 auto; width:1200px;height:480px;">
 			<div style="position:relative;float:left;width:800px;height:100%;">
 				<pre style="position:relative ;display:block; top:100;left:-180;">
 					<font size="35" style="font-family:serif;">Animal is</font>
@@ -330,8 +436,8 @@
 	</div>
 	
 	<!-- 검색창, 네모 메뉴 -->
-	<div id="content2ㄴ" style="position:relative;width:100%;height:50px;background-color:#F7F7F7;margin:0 auto;">
-    	<div style="position:relative;width:1060px;height:50px;margin:0 auto">
+	<div id="content2" style="position:relative;width:100%;height:50px;background-color:#F7F7F7;margin:0 auto;">
+    	<div id="content2_container" style="position:relative;width:1060px;height:50px;margin:0 auto">
 	    	<div class="container">
 			    <div class="search-box-container">
 				    <button class="submit"><i class="fa fa-search" style="padding-left: 15px;"></i></button>
@@ -350,8 +456,8 @@
 	</div>
 
 	<!-- 분양 리스트 -->
-	<div id="content3" style="position:relative;width:100%;height:700px;background-color:#f0efef;">
-		<div style="position:relative;width:1080px;height:320px;margin:0 auto">
+	<div id="content3" style="position:relative;width:100%;height:750px;background-color:#f0efef;">
+		<div id="petList_container" style="position:relative;width:1080px;height:750px;margin:0 auto">
 			<div class="petList" >
 				<img class="pets" src="resources/img/dog1.jpg"  />
 				<a href="" ><i class="fas fa-venus" style="color:hotpink;"></i>&nbsp; 미니 핀  1살</a><br>
@@ -376,8 +482,6 @@
 				<a href="" ><i class="fas fa-venus" style="color:hotpink;"></i>&nbsp; 토끼  1살</a><br>
 				<i class="fas fa-eye" style="margin-top:10px;color:gray"> 37&nbsp;<i class="fas fa-thumbtack"> 6</i></i>
 			</div>
-		</div>
-		<div style="position:relative;width:1080px;height:320px;margin:0 auto">
 			<div class="petList2">
 				<img class="pets" src="resources/img/cat2.jpg"  />
 				<a href="" ><i class="fas fa-mars"style="color:#4285F4;"></i>&nbsp; 페르시안  4개월</a><br>
@@ -403,8 +507,71 @@
 	
 	<!-- 로그인 팝업창 -->
 	<div id="mask"></div>
+	<div id="signIn_popup">
+		<form id="signIn_form" action="#">
+	  		<h1 style="pointer-events:none;cursor:default;">Sign In</h1>
+	  		<div class="question">
+	    		<input type="text" required/>
+	    		<label>UserID</label>
+	  		</div>
+	 		 <div class="question">
+	    		<input type="password" required/>
+	   			<label>Password</label>
+	  		</div>
+	  		<input type="button" value="로그인">
+	  		<i id="findid" class="fas fa-user" style="margin-left:170px;cursor:pointer;color:#333;"> Find ID</i>
+	  		<i id="findpw" class="fas fa-key" style="margin-left:20px;cursor:pointer;color:#333;"> Find PW</i>
+		</form>
+		<i id="signIn_close" class="fas fa-sign-out-alt"></i>
+	</div>
+	
+	<!-- 이용약관 팝업창 -->
 	<div id="popup_wrap">
-			
+		<form id="joincheck" action="" style="margin-top:100px;text-align:center;">
+		  <div class="boxes" style="padding-left:100px;">
+		  	 <input type="checkbox" id="checkall" name="checkall" value="all" style="float:center;">
+  			 <label for="checkall" style="width:425px;"><font style="font-family: 'Nanum Square';font-weight:bold;color:#333;">이용약관,개인정보 수집 및 이용과 메일 수신에 <b style="color:#da532c;">모두</b> 동의합니다.</font></label>
+		  </div>
+		  <div style="margin-top:35px;">
+			<textarea rows="7" cols="58" style="resize:none;border-radius:10px;background-color:#f0efef;">
+Petmily 서비스를 이용해 주셔서 감사합니다. 
+본 약관은 다양한 Petmily 서비스의 이용과 관련하여
+Petmily 서비스를 제공하는 Petmily와 이를 이용하는 
+Petmily 서비스 회원 또는 비회원과의 관계를 설명하며,
+아울러 여러분의 Petmily 서비스 이용에 도움이 될 수 있는 
+유익한 정보를 포함하고 있습니다.
+			</textarea>
+		  </div>	
+		  <div class="boxes" style="padding-left:100px;margin-top:20px;">
+		  	 <input type="checkbox" id="check1" name="check1" class="check123" value="1">
+  			 <label for="check1" style="width:240px;left:100px;"><font style="font-family: 'Nanum Square';font-weight:bold;color:#333;">Petmily 이용 약관 동의<b style="color:#da532c;"> (필수)</b></font></label>
+		  </div>
+		   <div style="margin-top:30px;">
+			<textarea rows="16" cols="58" style="resize:none;border-radius:10px;background-color:#f0efef;">
+정보통신망법 규정에 따라 Petmily에 회원가입 신청하시는 분께 수집하는 개인정보의 항목,
+개인정보의 수집 및 이용목적,개인정보의 보유 및 이용기간을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
+
+1. 수집하는 개인정보
+이용자는 회원가입을 하지 않아도 정보 검색 등 대부분의 Petmily 서비스를 회원과 동일하게 이용할 수 있습니다.
+이용자가 개인화 혹은 회원제 서비스를 이용하기 위해 회원가입을 할 경우,Petmily는 서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다.
+회원가입 시점에 네이버가 이용자로부터 수집하는 개인정보는 아래와 같습니다.
+- 회원 가입 시에 ‘아이디,비밀번호,이름,생년월일,가입인증 휴대전화번호’를 필수항목으로 수집합니다.
+			</textarea>
+		  </div>
+		  <div class="boxes" style="padding-left:100px;margin-top:20px;">
+		  	 <input type="checkbox" id="check2" name="check2"class="check123" value="2">
+  			 <label for="check2" style="width:220px;left:100px;"><font style="font-family:'Nanum Square';font-weight:bold;color:#333;">개인정보 수집 동의<b style="color:#da532c;"> (필수)</b></font></label>
+		  </div>
+		  <div class="boxes" style="padding-left:100px;margin-top:20px;">
+		  	 <input type="checkbox" id="check3" name="check3"class="check123" value="3">
+  			 <label for="check3" style="width:220px;left:100px;"><font style="font-family:'Nanum Square';font-weight:bold;color:#333;">메일/문자 수신 동의<b style="color:gray"> (선택)</b></font></label>
+		  </div>
+		  <div class="buttonnn" style="margin-top:80px;" >
+		  <button type="submit" style="right:40;float:right;">NEXT&nbsp;&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></button>
+		  <button onclick="history.back()" style="left:40;float:left;"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;BACK</button>
+		  </div>
+		</form>
+
 	</div>
 	
 </body>
