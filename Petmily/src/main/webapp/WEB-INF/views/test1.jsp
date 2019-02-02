@@ -377,6 +377,18 @@
 			});
 		});
 		
+		// expcheck
+		$('input[type="checkbox"][name="yes"]').click(function(){
+			if($(this).prop('checked')) {
+				$('input[type="checkbox"][name="yes"]').prop('checked', false);
+				$(this).prop('checked', true);
+			}
+			if($('input:checkbox[id="yes"]').is(":checked")==true)
+				$("#exp").css("display","grid");
+			else if($('input:checkbox[id="no"]').is(":checked")==true)
+				$("#exp").css("display","none");
+			else $("#exp").css("display","none");
+		});
 
 		// 화면
 		$(window).resize(function() {
@@ -663,17 +675,27 @@ Petmily 서비스 회원 또는 비회원과의 관계를 설명하며,
 	             <span class="border"style="width:31.9%;left:189.7px;"></span>
 	         </label>
 	        </div>
-	        <div style="position:relative;top:240px;text-align:center;">
-		        <div style="font-family:'Nanum Square';font-weight:bold;color:#333;">애완동물 키워본 경험</div>
+	        <div style="position:relative;top:250px;text-align:center;">
+        		<div style="font-size:14px; font-family:'Nanum Square';font-weight:bold;color:#333;opacity:0.7;">애완동물 키워본 경험</div>
 		        <input type="checkbox" id="yes" name="yes"value="Y">
-		        <label for="checkM" style="position:relative;top:80px;float:left;left:30px;"><font style="margin-left:20px;font-family:'Nanum Square';font-weight:bold;color:#333;">있음</font></label>
-		        <input type="checkbox" id="no" name="no"value="N">
-		        <label for="checkF" style="position:relative;top:80px;left:110px;"><font style="margin-left:-20px;font-family:'Nanum Square';font-weight:bold;color:#333;">없음</font></label>
-         	</div>
-		  <div class="buttonnn" style="margin-top:300px;" >
-		  <button type="submit" style="right:40;float:right;">NEXT&nbsp;&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></button>
-		  <button id="signUp_close1" style="left:40;float:left;"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;BACK</button>
-		  </div>
+		        <label for="yes" style="position:relative;top:10px;float:left;left:230px;"><font style="margin-left:20px;font-family:'Nanum Square';font-weight:bold;color:#333;">있음</font></label>
+		        <input type="checkbox" id="no" name="yes"value="N">
+		        <label for="no" style="position:relative;top:10px;left:310px;width: 63px;padding-left: 0px;"><font style="margin-left:-30px;font-family:'Nanum Square';font-weight:bold;color:#333;">없음</font></label>
+		    </div>
+		    <div id="exp" style="position:relative;top:280px;display:none;">
+			    <label for="pets,period" class="inp" style="position:relative;top:0;float:left;">
+			    <input type="text" id="pets" name="pets" placeholder="&nbsp;" style="width:49%;z-index:10;">
+			    <span class="label">애완동물 종류</span>
+			    <span class="border" style="width:49%;"></span>
+			    <input type="text" id="period" name="period" placeholder="&nbsp;" style="width:49%;">
+			    <span class="label" style="left:145px;">기간</span>
+			    <span class="border"style="width:49%;left:142.5px;"></span>
+			    </label>
+		    </div>
+		    <div class="buttonnn" style="position:absolute; top:710px;width:600px;" >
+			    <button type="submit" style="right:40;float:right;">NEXT&nbsp;&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></button>
+			    <button id="signUp_close1" style="left:40;float:left;"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;BACK</button>
+		    </div>
 		</form>
 	</div>
 </body>
