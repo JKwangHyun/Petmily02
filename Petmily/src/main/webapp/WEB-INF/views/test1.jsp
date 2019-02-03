@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="resources/css/signForm.css">
@@ -377,16 +378,28 @@
 			});
 		});
 		
-		// expcheck
-		$('input[type="checkbox"][name="yes"]').click(function(){
+		// gendercheck
+		$('input[type="checkbox"][name="gender"]').click(function(){
 			if($(this).prop('checked')) {
-				$('input[type="checkbox"][name="yes"]').prop('checked', false);
+				$('input[type="checkbox"][name="gender"]').prop('checked', false);
 				$(this).prop('checked', true);
 			}
-			if($('input:checkbox[id="yes"]').is(":checked")==true)
+		});
+		
+		// expcheck
+		$('input[type="checkbox"][name="exp"]').click(function(){
+			if($(this).prop('checked')) {
+				$('input[type="checkbox"][name="exp"]').prop('checked', false);
+				$(this).prop('checked', true);
+			}
+			if($('input:checkbox[id="yes"]').is(":checked")==true) {
+				$('#expArea').html('');
 				$("#exp").css("display","grid");
-			else if($('input:checkbox[id="no"]').is(":checked")==true)
+			}
+			else if($('input:checkbox[id="no"]').is(":checked")==true) {
+				$('#expArea').html('');
 				$("#exp").css("display","none");
+			}
 			else $("#exp").css("display","none");
 		});
 
@@ -433,6 +446,119 @@
 				}, 400);
 		}
 	}
+	
+	// 로그인
+	function login() {
+		var id=$('#id').val();
+		var pw=$('#pw').val();
+		if (id.length<1) {
+			$('#logincheck').html('아이디를 입력해주세요.');
+			return; 
+		}
+		if (pw.length<1) {
+			$('#logincheck').html('비밀번호를 입력해주세요.');
+			return;
+		}
+		$.ajax({
+			type : "Post",
+			url : "login",
+			data:{
+				 id: $("#id").val(), 
+				 pw:$("#pw").val(), 	
+			},
+			success : function(result) {
+					$("#logincheck").html(result);
+			}
+		});
+		$('#logincheck').html('');
+	}
+	
+	//회원가입
+	function joincheck() {
+		var id= $('#id').val();
+		var pw= $('#pw').val();
+		var pwcheck= $('#pwcheck').val();
+		var name= $('#name').val();
+		var bday=$('#bday').val();
+		var hp1=$('#pnum1').val();
+		var hp2=$('#pnum2').val();
+		var hp3=$('#pnum3').val();
+		var detail1=$('#pets').val();
+		var detail2=$('#period').val();
+		
+		if(id.length=='') {
+			$('#idArea').html('아이디를 입력하세요.');
+			return;
+		}
+		else if(id.length<4 || id.replace(/[a-z.0-9]/g,'').length>0) {
+			$('#idArea').html('4자 이상 영문,숫자만 입력 가능합니다.');
+			return;
+		} else $('#idArea').html('');
+		
+		if(pw.length=='') {
+			$('#pwArea1').html('비밀번호를 입력하세요. ');
+			return;
+		}
+		else if(pw.length<4 || pw.replace(/[a-z.0-9]/g,'').length>0) {
+			$('#pwArea1').html('5자 이상 영문,숫자만 입력 가능합니다.');
+			return;
+		}else $('#pwArea1').html('');
+		
+		/* if(pwcheck.length=='') {
+			$('#pwArea2').html('비밀번호 입력 확인을 해주세요. ');
+			return;
+		}
+		else if(pw != pwcheck) {
+			$('#pwArea2').html('비밀번호가 일치하지 않습니다.');
+			return;
+		}else $('#pwArea2').html(''); */
+		
+/* 		if(pwcheck.length=='') {
+			$('#pwArea2').html('비밀번호 입력 확인을 해주세요. ');
+			return;
+		} */
+		if(pwcheck.length=='' || (pw != pwcheck)) {
+			$('#pwArea2').html('<i class="fas fa-times"></i>');
+			return;
+		}else $('#pwArea2').html('<i class="fas fa-check"></i>');
+		
+		if(name.length=='') {
+			$('#nameArea').html('이름을 입력하세요. ');
+			return;
+		}
+		else if(name.replace(/[가-힣.a-z]/g,'').length>0) {
+			$('#nameArea').html('한글,영어만 사용 가능합니다.');
+			return;
+		}else $('#nameArea').html('');
+		
+		if($('input:checkbox[id="checkM"]').is(":checked")==false 
+				&& $('input:checkbox[id="checkF"]').is(":checked")==false) {
+			$('#genderArea').html('성별을 선택하세요. ');
+			return;
+		}else $('#genderArea').html('');
+		if(bday.length != 6) {
+			$('#bdayArea').html('생년월일 6자리를 정확히 입력하세요.');
+			return;
+		}else $('#bdayArea').html('');
+		
+		if((hp1.length != 3)||(hp2.length != 4)||(hp3.length != 4)) {
+			$('#phnumArea').html('전화번호를 정확히 입력하세요.');
+			return;
+		}else $('#phnumArea').html('');
+		
+		if($('input:checkbox[id="yes"]').is(":checked")==false 
+				&& $('input:checkbox[id="no"]').is(":checked")==false) {
+			$('#expArea').html('애완동물 키워본 경험을 선택하세요.');
+			return;
+		}else $('#expArea').html('');
+		
+		if((detail1=='')||(detail2=='')) {
+			$('#expDetailArea').html('상세 경험을 입력해 주세요.');
+			return;
+		}else $('#expDetailArea').html('');
+		
+		$('signUp_form').submit();
+	}
 </script>
 <body>
 	<!-- header -->
@@ -440,30 +566,38 @@
 		<div style="position:absolute;width:97%;height:40px;margin:0 auto;padding-top:6px;left:40px;">
 			<a href=""><img src="resources/img/logo6.png" width="140px" height="40px" style="float:left;"/></a>
 			<ul id="menu" style="position:relative;top:-8px;float:left;">
-				<li id="community"><a href="#">Community</a></li>
 				<li id="adoption"><a href="#">Adoption Of Pets</a></li>
+				<li id="community"><a href="#">Community</a></li>
 				<li><a href="#">Find Pet Hospital</a></li>
 			</ul>
 			<ul id="sign" style="position:relative;top:-8px;float:right;">
-				<li id="signIn">Sign In</li>
-				<li id="signUp">Sign Up</li>
+				<c:choose>
+					<c:when test="${Login.id == null}">
+						<li id="signIn">Sign In</li>
+						<li id="signUp">Sign Up</li>
+					</c:when>
+					<c:when test="${Login.id != null}">
+						<li id="signIn">${Login.name}</li>
+						<li id="signUp">Logout</li>
+					</c:when>
+				</c:choose>
 			</ul>
 		</div>
 	</div>
 	
-	<!-- Community slide -->
-	<div id="menu_slide_Community" style="position:absolute;width:190px;height:85px;background-color:#333;z-index:10;left:220px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">
+	<!--  Adoption Of Pets slide -->
+	<div id="menu_slide_Adoption" style="position:absolute;width:170px;height:85px;background-color:#333;z-index:10;left:220px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">
 		<ul class="menu_slide">
-			<li style="margin-bottom:15px;"><a href="">공지사항</a></li>
-			<li><a href="">정보공유 게시판</a></li>
+			<li style="margin-bottom:15px;"><a href="">Registration</a></li>
+			<li><a href="">Adoption</a></li>
 		</ul>
 	</div>
 	
-	<!--  Adoption Of Pets slide -->
-	<div id="menu_slide_Adoption" style="position:absolute;width:190px;height:85px;background-color:#333;z-index:10;left:337px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">
+	<!-- Community slide -->
+	<div id="menu_slide_Community" style="position:absolute;width:150px;height:85px;background-color:#333;z-index:10;left:385px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">
 		<ul class="menu_slide">
-			<li style="margin-bottom:15px;"><a href="">분양 등록</a></li>
-			<li><a href="">분양 하기</a></li>
+			<li style="margin-bottom:15px;"><a href="">Notice</a></li>
+			<li><a href="">Sharing Info</a></li>
 		</ul>
 	</div>
 	
@@ -558,17 +692,18 @@
 	<!-- 로그인 팝업창 -->
 	<div id="mask"></div>
 	<div id="signIn_popup">
-		<form id="signIn_form" action="#">
+		<form id="signIn_form" method="post">
 	  		<h1 style="pointer-events:none;cursor:default;">Sign In</h1>
 	  		<div class="question">
-	    		<input type="text" required/>
+	    		<input type="text" id="id1" name="id1" required/>
 	    		<label>UserID</label>
 	  		</div>
-	 		 <div class="question">
-	    		<input type="password" required/>
+	 		<div class="question">
+	    		<input type="password" id="pw1" name="pw1" required/>
 	   			<label>Password</label>
 	  		</div>
-	  		<input type="button" value="로그인">
+	  		<div id="logincheck" style="position:relative;top:10px;text-align:center;color:#da532c;font-family:'Nanum Square';font-weight: bold;"></div>
+	  		<input type="button" value="로그인" onclick="login()" style="margin-top:25px;">
 	  		<i id="findid" class="fas fa-user" style="margin-left:170px;cursor:pointer;color:#333;"> Find ID</i>
 	  		<i id="findpw" class="fas fa-key" style="margin-left:20px;cursor:pointer;color:#333;"> Find PW</i>
 		</form>
@@ -628,72 +763,90 @@ Petmily 서비스 회원 또는 비회원과의 관계를 설명하며,
 	<!-- 회원가입 팝업창 -->
 	<div id="mask"></div>
 	<div id="signUp_wrap1">
-		<form action="">
+		<form id="signUp_form" action="#" autocomplete="off">
 		 <div style="position:relative;top:100px;display: grid;">		
 		  <label for="id" class="inp">
   		  	<input type="text" id="id" name="id" placeholder="&nbsp;">
   	      	<span class="label">아이디</span>
           	<span class="border"></span>
 	      </label>
+	      <div id="idArea" style="position:relative;top:10px;text-align:center;"></div>
+	      
 	      <label for="pw" class="inp" style="top:20px;">
   		  	<input type="password" id="pw" name="pw" placeholder="&nbsp;">
   	      	<span class="label">비밀번호</span>
           	<span class="border"></span>
 	      </label>
+	      <div id="pwArea1" style="position:relative;top:30px;text-align:center;"></div>
+	      
 	      <label for="pwcheck" class="inp" style="top:40px;">
   		  	<input type="password" id="pwcheck" name="pwcheck" placeholder="&nbsp;">
   	      	<span class="label">비밀번호 확인</span>
           	<span class="border"></span>
 	      </label>
+	      <div id="pwArea2" style="position:absolute;top:160px;left:450px;"></div>
+	      
 	      <label for="name" class="inp" style="top:60px;">
   		  	<input type="text" id="name" name="name" placeholder="&nbsp;">
   	      	<span class="label">이름</span>
           	<span class="border"></span>
 	      </label>
+	      <div id="nameArea" style="position:relative;top:70px;text-align:center;"></div>
 	      </div>
-	      <div style="position:relative;top:100px;left:220px;">
-		      <input type="checkbox" id="checkM" name="checkM"value="M">
-	  		  <label for="checkM" style="position:relative;top:80px;float:left;"><font style="font-family:'Nanum Square';font-weight:bold;color:#333;margin-left:25px;">남성</font></label>
-	  		  <input type="checkbox" id="checkF" name="checkF"value="F">
-	  		  <label for="checkF" style="position:relative;top:80px;left:110px;"><font style="font-family:'Nanum Square';font-weight:bold;color:#333;margin-left:-20px;">여성</font></label>
+	      
+	      <div style="position:relative;top:100px;left:200px;">
+		      <input type="checkbox" id="checkM" name="gender" value="M">
+	  		  <label for="checkM" style="position:relative;top:80px;float:left;left:30px;"><font style="margin-left:20px;font-family:'Nanum Square';font-weight:bold;color:#333;">남성</font></label>
+	  		  <input type="checkbox" id="checkF" name="gender" value="F">
+	  		  <label for="checkF" style="position:relative;top:80px;left:110px;"><font style="margin-left:-20px;font-family:'Nanum Square';font-weight:bold;color:#333;">여성</font></label>
+	      <div id="genderArea" style="position:relative;top:90px;left:30px;"></div>
 	      </div>
+	      
 	      <div style="position:relative;top:180px;display: grid;">
 	         <label for="bday" class="inp" style="top:20px;">
 	             <input type="text" id="bday" name="bday" placeholder="&nbsp;">
 	              <span class="label">생년월일 (6자리)</span>
 	             <span class="border"></span>
 	         </label>
+	       <div id="bdayArea" style="position:relative;top:30px;text-align:center;"></div>
+	       
 	         <label for="pnum1,pnum2,pnum3" class="inp" style="position:relative;top:40px;float:left;">
-	             <input type="text" id="pnum1" name="pnum1" placeholder="&nbsp;" style="width:31.9%;">
+	             <input type="text" id="pnum1" name="hp1" placeholder="&nbsp;" style="width:31.9%;">
 	             <span class="label">(010)</span>
 	             <span class="border" style="width:31.9%;"></span>
-	             <input type="text" id="pnum2" name="pnum2" placeholder="&nbsp;" style="width:31.9%;">
+	             <input type="text" id="pnum2" name="hp2" placeholder="&nbsp;" style="width:31.9%;">
 	             <span class="label" style="left:97px;">0000</span>
 	             <span class="border"style="width:31.9%;left:94.7px;"></span>
-	             <input type="text" id="pnum3" name="pnum3" placeholder="&nbsp;"style="width:31.9%;">
+	             <input type="text" id="pnum3" name="hp3" placeholder="&nbsp;"style="width:31.9%;">
 	             <span class="label" style="left:192px;">0000</span>
 	             <span class="border"style="width:31.9%;left:189.7px;"></span>
 	         </label>
+	         <div id="phnumArea" style="position:relative;top:50px;text-align:center;"></div>
 	        </div>
+	        
 	        <div style="position:relative;top:250px;text-align:center;">
         		<div style="font-size:14px; font-family:'Nanum Square';font-weight:bold;color:#333;opacity:0.7;">애완동물 키워본 경험</div>
-		        <input type="checkbox" id="yes" name="yes"value="Y">
+		        <input type="checkbox" id="yes" name="exp"value="Y">
 		        <label for="yes" style="position:relative;top:10px;float:left;left:230px;"><font style="margin-left:20px;font-family:'Nanum Square';font-weight:bold;color:#333;">있음</font></label>
-		        <input type="checkbox" id="no" name="yes"value="N">
+		        <input type="checkbox" id="no" name="exp"value="N">
 		        <label for="no" style="position:relative;top:10px;left:310px;width: 63px;padding-left: 0px;"><font style="margin-left:-30px;font-family:'Nanum Square';font-weight:bold;color:#333;">없음</font></label>
+		        <div id="expArea" style="position:relative;top:20px;text-align:center;"></div>
 		    </div>
+		    
 		    <div id="exp" style="position:relative;top:280px;display:none;">
 			    <label for="pets,period" class="inp" style="position:relative;top:0;float:left;">
-			    <input type="text" id="pets" name="pets" placeholder="&nbsp;" style="width:49%;z-index:10;">
+			    <input type="text" id="pets" name="detail1" placeholder="&nbsp;" style="width:49%;z-index:10;">
 			    <span class="label">애완동물 종류</span>
 			    <span class="border" style="width:49%;"></span>
-			    <input type="text" id="period" name="period" placeholder="&nbsp;" style="width:49%;">
+			    <input type="text" id="period" name="detail2" placeholder="&nbsp;" style="width:49%;">
 			    <span class="label" style="left:145px;">기간</span>
 			    <span class="border"style="width:49%;left:142.5px;"></span>
 			    </label>
+			    <div id="expDetailArea" style="position:relative;top:10;text-align:center;"></div>
 		    </div>
+		    
 		    <div class="buttonnn" style="position:absolute; top:710px;width:600px;" >
-			    <button type="submit" style="right:40;float:right;">NEXT&nbsp;&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></button>
+			    <button onclick="joincheck()" type="button" style="right:40;float:right;">NEXT&nbsp;&nbsp;&nbsp;<i class="fas fa-arrow-right"></i></button>
 			    <button id="signUp_close1" style="left:40;float:left;"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;BACK</button>
 		    </div>
 		</form>
