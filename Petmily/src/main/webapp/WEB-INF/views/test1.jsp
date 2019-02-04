@@ -254,6 +254,7 @@
 		var searchBox = $(".search-box");
 		var response = $(".response");
 		var isOpen = false;
+		
 		submit.on("mousedown", function (e) {
 			e.preventDefault();
 			boxContainer.toggleState(!isOpen);
@@ -425,6 +426,28 @@
 			}
 		});
 		
+		// 회원가입 focusout
+		$('#id').focusout(function(){
+			var id= $('#id').val();
+			if(id.length=='') {
+				$('#idArea').html('아이디를 입력하세요.');
+				return;
+			}
+			else if(id.length<4 || id.replace(/[a-z.0-9]/g,'').length>0) {
+				$('#idArea').html('4자 이상 영문,숫자만 입력 가능합니다.');
+				return;
+			}$('#idArea').html('');
+			$.ajax({
+				type : 'Post',
+				url : "idcheck",
+				data : {
+					id : $('#id').val(),
+				},
+				success : function(result) {
+					$('#idcheck').html(result)
+				}
+			});
+		}); // focusout
 	});
 	
 	// check 알림
@@ -449,8 +472,8 @@
 	
 	// 로그인
 	function login() {
-		var id=$('#id').val();
-		var pw=$('#pw').val();
+		var id=$('#logid').val();
+		var pw=$('#logpw').val();
 		if (id.length<1) {
 			$('#logincheck').html('아이디를 입력해주세요.');
 			return; 
@@ -463,8 +486,8 @@
 			type : "Post",
 			url : "login",
 			data:{
-				 id: $("#id").val(), 
-				 pw:$("#pw").val(), 	
+				 id: $("#logid").val(), 
+				 pw:$("#logpw").val(), 	
 			},
 			success : function(result) {
 					$("#logincheck").html(result);
@@ -487,7 +510,7 @@
 		var detail2=$('#period').val();
 		
 		if(id.length=='') {
-			$('#idArea').html('아이디를 입력하세요.');
+			$('#idArea').html('아이디를 입력하세요.');$('#idArea').html('4자 이상 영문,숫자만 입력 가능합니다.');
 			return;
 		}
 		else if(id.length<4 || id.replace(/[a-z.0-9]/g,'').length>0) {
@@ -504,23 +527,10 @@
 			return;
 		}else $('#pwArea1').html('');
 		
-		/* if(pwcheck.length=='') {
-			$('#pwArea2').html('비밀번호 입력 확인을 해주세요. ');
-			return;
-		}
-		else if(pw != pwcheck) {
-			$('#pwArea2').html('비밀번호가 일치하지 않습니다.');
-			return;
-		}else $('#pwArea2').html(''); */
-		
-/* 		if(pwcheck.length=='') {
-			$('#pwArea2').html('비밀번호 입력 확인을 해주세요. ');
-			return;
-		} */
 		if(pwcheck.length=='' || (pw != pwcheck)) {
-			$('#pwArea2').html('<i class="fas fa-times"></i>');
+			$('#pwArea2').html('<i class="fas fa-times" style="color:#da532c;"></i>');
 			return;
-		}else $('#pwArea2').html('<i class="fas fa-check"></i>');
+		}else $('#pwArea2').html('<i class="fas fa-check" style="color:#7CBB00;"></i>');
 		
 		if(name.length=='') {
 			$('#nameArea').html('이름을 입력하세요. ');
@@ -559,6 +569,13 @@
 		
 		$('signUp_form').submit();
 	}
+	
+	//핸드폰 번호,생년월일 숫자 입력 제한
+	function maxLengthCheck(object){
+		if (object.value.length > object.maxLength){
+	    	object.value = object.value.slice(0, object.maxLength);
+	    }    
+	}
 </script>
 <body>
 	<!-- header -->
@@ -577,8 +594,8 @@
 						<li id="signUp">Sign Up</li>
 					</c:when>
 					<c:when test="${Login.id != null}">
-						<li id="signIn">${Login.name}</li>
-						<li id="signUp">Logout</li>
+						<li><i class="fas fa-user-circle" style="font-size:25px;margin-top:-1px;"></i><font style="position:relative;top:-2px;"> ${Login.name} 님</font></li>
+						<li><a href="logout" style="margin:0;">Logout</a></li>
 					</c:when>
 				</c:choose>
 			</ul>
@@ -692,14 +709,14 @@
 	<!-- 로그인 팝업창 -->
 	<div id="mask"></div>
 	<div id="signIn_popup">
-		<form id="signIn_form" method="post">
+		<form id="signIn_form" method="post" autocomplete="off">
 	  		<h1 style="pointer-events:none;cursor:default;">Sign In</h1>
 	  		<div class="question">
-	    		<input type="text" id="id1" name="id1" required/>
+	    		<input type="text" id="logid" name="id" required/>
 	    		<label>UserID</label>
 	  		</div>
 	 		<div class="question">
-	    		<input type="password" id="pw1" name="pw1" required/>
+	    		<input type="password" id="logpw" name="pw" required/>
 	   			<label>Password</label>
 	  		</div>
 	  		<div id="logincheck" style="position:relative;top:10px;text-align:center;color:#da532c;font-family:'Nanum Square';font-weight: bold;"></div>
@@ -771,6 +788,7 @@ Petmily 서비스 회원 또는 비회원과의 관계를 설명하며,
           	<span class="border"></span>
 	      </label>
 	      <div id="idArea" style="position:relative;top:10px;text-align:center;"></div>
+	      <div id="idcheck" style="position:absolute;top:20px;left:450px;"></div>
 	      
 	      <label for="pw" class="inp" style="top:20px;">
   		  	<input type="password" id="pw" name="pw" placeholder="&nbsp;">
@@ -804,20 +822,20 @@ Petmily 서비스 회원 또는 비회원과의 관계를 설명하며,
 	      
 	      <div style="position:relative;top:180px;display: grid;">
 	         <label for="bday" class="inp" style="top:20px;">
-	             <input type="text" id="bday" name="bday" placeholder="&nbsp;">
+	             <input type="text" id="bday" name="bday" placeholder="&nbsp;" maxlength="6"oninput="maxLengthCheck(this)">
 	              <span class="label">생년월일 (6자리)</span>
 	             <span class="border"></span>
 	         </label>
 	       <div id="bdayArea" style="position:relative;top:30px;text-align:center;"></div>
 	       
 	         <label for="pnum1,pnum2,pnum3" class="inp" style="position:relative;top:40px;float:left;">
-	             <input type="text" id="pnum1" name="hp1" placeholder="&nbsp;" style="width:31.9%;">
+	             <input type="text" id="pnum1" name="hp1" placeholder="&nbsp;"maxlength="3" oninput="maxLengthCheck(this)" style="width:31.9%;">
 	             <span class="label">(010)</span>
 	             <span class="border" style="width:31.9%;"></span>
-	             <input type="text" id="pnum2" name="hp2" placeholder="&nbsp;" style="width:31.9%;">
+	             <input type="text" id="pnum2" name="hp2" placeholder="&nbsp;" maxlength="4" oninput="maxLengthCheck(this)"style="width:31.9%;">
 	             <span class="label" style="left:97px;">0000</span>
 	             <span class="border"style="width:31.9%;left:94.7px;"></span>
-	             <input type="text" id="pnum3" name="hp3" placeholder="&nbsp;"style="width:31.9%;">
+	             <input type="text" id="pnum3" name="hp3" placeholder="&nbsp;" maxlength="4" oninput="maxLengthCheck(this)"style="width:31.9%;">
 	             <span class="label" style="left:192px;">0000</span>
 	             <span class="border"style="width:31.9%;left:189.7px;"></span>
 	         </label>

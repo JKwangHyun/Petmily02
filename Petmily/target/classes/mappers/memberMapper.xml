@@ -5,5 +5,12 @@
   
 <mapper namespace="banana.apple.mapper.memberMapper">
 
+<select id="memberDetail" resultType="aaa.bbb.ccc.vo.MemberVO"> 
+ 		select * from pmember where id=#{id} and pw=#{pw}
+</select>
+
+<select id="idcheck" resultType="aaa.bbb.ccc.vo.MemberVO"> 
+ 		select * from pmember where id=#{id}
+</select>
 
 </mapper>
