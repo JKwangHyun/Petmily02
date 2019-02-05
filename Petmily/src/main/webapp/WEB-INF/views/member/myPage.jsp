@@ -60,10 +60,6 @@
 		margin-top:10px;
     	padding-left:0px;
 	}
-	#update_container {
-		animation-name: animate_update;
-  		animation-duration: 0.4s;
-	}
 	
 	@keyframes animate_profile {
 		from {left:200px;opacity:1}
@@ -101,6 +97,9 @@
 		
 		// 수정하기 클릭
 		$('#user_edit').click(function() {
+			if($("#delete_container").css("display","block")) {
+				$("#delete_container").css("display", "none");
+			}
 			$('#pu').css('width','1050px');
 			$("#profile_container").css("animation-name","animate_profile");
 			$("#profile_container").css("animation-duration","0.4s");
@@ -108,6 +107,7 @@
 			$("#update_container").css("animation-name","animate_update");
 			$("#update_container").css("animation-duration","0.4s");
 		});
+		// 수정하기 닫기 클릭
 		$('#edit').click(function() {
 			$("#profile_container").css("animation-name","animate_profile2");
 			$("#profile_container").css("animation-duration","0.4s");
@@ -115,6 +115,30 @@
 			$("#update_container").css("animation-duration","0.4s");
 			setTimeout(function() {
 				$("#update_container").css("display", "none");
+				$('#pu').css('width','500px');
+				}, 400);
+		});
+		
+		// 탈퇴하기 클릭
+		$('#user_out').click(function() {
+			if($("#update_container").css("display","block")) {
+				$("#update_container").css("display", "none");
+			}
+			$('#pu').css('width','1050px');
+			$("#profile_container").css("animation-name","animate_profile");
+			$("#profile_container").css("animation-duration","0.4s");
+			$("#delete_container").css("display","block");
+			$("#delete_container").css("animation-name","animate_update");
+			$("#delete_container").css("animation-duration","0.4s");
+		});
+		// 탈퇴하기 닫기 클릭
+		$('#delete').click(function() {
+			$("#profile_container").css("animation-name","animate_profile2");
+			$("#profile_container").css("animation-duration","0.4s");
+			$("#delete_container").css("animation-name","animate_update2");
+			$("#delete_container").css("animation-duration","0.4s");
+			setTimeout(function() {
+				$("#delete_container").css("display", "none");
 				$('#pu').css('width','500px');
 				}, 400);
 		});
@@ -156,6 +180,8 @@
 	<!-- 프로필 -->
 	<div id="profile" style="position:relative;width:100%;height:380px;top:50px;">
 		<div id="pu" style="width:500px; margin:0 auto;">
+			
+			<!-- 프로필 폼 -->
 			<div id="profile_container" style="position:relative;width:500px;height:380px;float:left; background-color:#F8F8F8;border-radius:20px;">
 				<div style="position:relative;top:30px;border-radius:50%;border:3px solid #333; width:130px;height:130px;margin:0 auto;background-image:url('resources/img/cat1.jpg');background-size:cover;"></div>
 				<div style="position:relative; width:500px;height:190;top:50px;">
@@ -177,11 +203,15 @@
 					</table>
 				</div>
 			</div>
+			
+			<!-- 수정하기 폼 -->
 			<div id="update_container" style="position:relative;margin-left:30px;width:500px;height:380;float:left;background-color:#F8F8F8;border-radius:20px;display:none;">
-				<button type="button" id="edit">닫기</button>
+				<button type="button" id="edit">수정하기 닫기</button>
 			</div>
+			
+			<!-- 탈퇴하기 폼 -->
 			<div id="delete_container" style="position:relative;margin-left:30px;width:500px;height:380;float:left;background-color:#F8F8F8;border-radius:20px;display:none;">
-				<button type="button" id="delete">닫기</button>
+				<button type="button" id="delete">탈퇴하기 닫기</button>
 			</div>
 		</div>
 	</div>
