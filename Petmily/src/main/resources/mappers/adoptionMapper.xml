@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="banana.apple.mapper.adoptionMapper">
+
+<insert id="registration" parameterType="hashmap">
+	insert into poboard (seq, id, title, content, pdate, pettype, petage, petgender, petkind, address, root, step, indent) values
+		((select nvl(max(seq),0)+1 from poboard),#{id},#{title},#{content},sysdate,#{pettype},#{petage},#{petgender},#{petkind},#{address},
+		(select nvl(max(seq),0)+1 from poboard),0,0)
+</insert>
+
+</mapper>
